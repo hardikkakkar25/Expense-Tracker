@@ -11,7 +11,7 @@ const [tableData,setTableData] = useState(data);
       <h1>Track Your Expense</h1>
       <div className="expense-tracker">
       <Expenseform setTableData={setTableData}/>
-      <Expensetable tableData={tableData}/>
+      <Expensetable tableData={tableData} setTableData={setTableData}/>
 
         <div className="context-menu">
             <div>Edit</div>
