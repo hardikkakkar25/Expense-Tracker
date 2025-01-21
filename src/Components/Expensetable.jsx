@@ -1,7 +1,19 @@
 import React from 'react'
 import data from '../assets/sample'
 
-const Expensetable = ({tableData}) => {
+const Expensetable = ({tableData,setTableData}) => {
+  const filterTableData = (e) => {
+  const category = e.target.value.toLowerCase(); 
+  if (category) {
+    const filteredData = tableData.filter((item) => 
+      item.category.toLowerCase() === category
+    );
+    if (filteredData.length) {
+      setTableData(filteredData);
+    }
+  }
+};
+
   return (
     <>
         <table className="expense-table">
@@ -9,9 +21,9 @@ const Expensetable = ({tableData}) => {
             <tr>
               <th>Title</th>
               <th>
-                <select>
+                <select onChange={filterTableData}>
                   <option value="">All</option>
-                  <option value="grocery">Grocery</option>
+                  <option value="Grocery">Grocery</option>
                   <option value="clothes">Clothes</option>
                   <option value="bills">Bills</option>
                   <option value="education">Education</option>
@@ -63,7 +75,7 @@ const Expensetable = ({tableData}) => {
               <th>Total</th>
               <th></th>
               <th></th>
-              <th>₹8100</th>
+              <th>₹ {tableData.reduce((total, item) => total + item.amount, 0)}</th>
             </tr>
           </tbody>
         </table>
